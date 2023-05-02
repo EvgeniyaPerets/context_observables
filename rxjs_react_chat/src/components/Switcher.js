@@ -1,15 +1,10 @@
-import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import chatStore from '../store/chat';
+import useInitialState from '../hooks/useInitialState';
 
 const Switcher = () => {
-  const [chatState, setChatState] = useState(chatStore.initialState);
   const location = window.location.href.split('/')[3];
 
-  useEffect(() => {
-    chatStore.subscribe(setChatState)
-    chatStore.init()
-  }, [])
+  const [chatState] = useInitialState()
 
   const msgNotification = chatState.newDataCount > 0 && (<span className='notify'>{chatState.newDataCount}</span>)
 

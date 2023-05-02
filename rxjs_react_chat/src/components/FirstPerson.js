@@ -1,13 +1,8 @@
-import { useLayoutEffect, useState } from 'react'
 import chatStore from '../store/chat';
+import useInitialState from '../hooks/useInitialState'
 
 const FirstPerson = () => {
-  const [chatState, setChatState] = useState(chatStore.initialState);
-
-  useLayoutEffect(() => {
-    chatStore.subscribe(setChatState);
-    chatStore.init();
-  }, []);
+  const [chatState] = useInitialState();
 
   const onFormSubmit = e => {
     e.preventDefault()
